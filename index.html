@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vehicle Image Upload</title>
+    <style>
+      body {
+        font-family: "Arial";
+        color: #333;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      #top-bar {
+        background-color: #1e90ff;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        font-size: 24px;
+        width: 100%;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        z-index: 1;
+      }
+
+      main {
+        margin-top: 60px;
+        text-align: center;
+        width: 80%;
+        max-width: 400px;
+        box-sizing: border-box;
+        position: relative;
+        border: 2px solid #1e90ff;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      h1,
+      h2 {
+        color: #1e90ff;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #1e90ff;
+      }
+
+      input[type="file"] {
+        display: block;
+        width: 60%;
+        margin: 0 auto;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: #1e90ff;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button:hover {
+        background-color: #007acc;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="top-bar">Vehicle Classification</div>
+
+    <main>
+      <h1>Vehicle Image Upload</h1>
+
+      <form
+        action="#"
+        method="post"
+        enctype="multipart/form-data"
+        id="uploadForm"
+      >
+        <label for="imageUpload">Select an image:</label>
+        <input
+          type="file"
+          name="imageUpload"
+          id="imageUpload"
+          accept="image/*"
+          required
+        />
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+
+      <h2>Vehicle Classifications:</h2>
+      <ul>
+        <li>Car</li>
+        <li>Ambulance</li>
+        <li>Truck</li>
+        <li>Motorcycle</li>
+        <li>etc</li>
+      </ul>
+    </main>
+  </body>
+</html>
