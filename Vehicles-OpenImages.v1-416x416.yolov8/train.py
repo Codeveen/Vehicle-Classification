@@ -15,4 +15,4 @@ if __name__ == '__main__':
     model = YOLO("yolov8m.yaml")  # build a new model from scratch
 
     # Use the model
-    results = model.train(data="data.yaml", epochs=150, patience=)  # train the model
+    results = model.train(data="data.yaml", epochs=150)  # train the model
