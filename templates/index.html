@@ -10,7 +10,7 @@
         color: #333;
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow: auto;
         background-color: #f0f0f0;
         display: flex;
         flex-direction: column;
@@ -118,17 +118,17 @@
 
          <div id="result-container" style="display: none;">
             <h2>Processed Image</h2>
-            <img id="processed-image" alt="Processed Image">
+            <img id="processed-image" alt="Processed Image" style="max-width: 100%;">
         </div>
 
 
       <h2>Vehicle Classifications:</h2>
       <ul>
-        <li>Car</li>
-        <li>Ambulance</li>
-        <li>Truck</li>
-        <li>Motorcycle</li>
-        <li>Bus</li>
+        <li>Car: <p id="car"></p></li>
+        <li>Ambulance: <p id="ambulance"></p></li>
+        <li>Truck: <p id="truck"></p></li>
+        <li>Motorcycle: <p id="motorcycle"></p></li>
+        <li>Bus: <p id="bus"></p></li>
       </ul>
     </main>
     <script>
@@ -145,8 +145,12 @@
             .then(data => {
                 if (data.success) {
                     document.getElementById('processed-image').src = data.image_path;
-                    console.log(data.image_path);
                     document.getElementById('result-container').style.display = 'block';
+                    document.getElementById('car').innerHTML = data.Car;
+                    document.getElementById('ambulance').innerHTML = data.Ambulance;
+                    document.getElementById('truck').innerHTML = data.Truck;
+                    document.getElementById('motorcycle').innerHTML = data.Motorcycle;
+                    document.getElementById('bus').innerHTML = data.Bus;
                 } else {
                     alert('Error processing the image. Please try again.');
                 }

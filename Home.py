@@ -1,3 +1,4 @@
+import cv2
 from flask import Flask, render_template, request, jsonify
 import os
 
@@ -23,7 +24,7 @@ def post():
     if file.filename == '':
         return "No selected file"
 
-    # Save the uploaded file to a folder (e.g., 'uploads')
+    # Save the uploaded file to a folder (e.g., 'static')
     upload_folder = 'uploads'
     if not os.path.exists(upload_folder):
         os.makedirs(upload_folder)
@@ -50,24 +51,27 @@ def post():
         boxes = r.boxes
         for box in boxes:
             # Bounding Box
-            # x1, y1, x2, y2 = box.xyxy[0]
-            # x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
-            # # cv2.rectangle(img,(x1,y1),(x2,y2),(255,0,255),3)
-            # w, h = x2 - x1, y2 - y1
-            # cvzone.cornerRect(img, (x1, y1, w, h))
-            # # Confidence
-            # conf = math.ceil((box.conf[0] * 100)) / 100
-            # # Class Name
+            x1, y1, x2, y2 = box.xyxy[0]
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+            # cv2.rectangle(img,(x1,y1),(x2,y2),(255,0,255),3)
+            w, h = x2 - x1, y2 - y1
+            cvzone.cornerRect(img, (x1, y1, w, h))
+            # Confidence
+            conf = math.ceil((box.conf[0] * 100)) / 100
+            # Class Name
             cls = int(box.cls[0])
             #
-            # cvzone.putTextRect(img, f'{classNames[cls]} {conf}', (max(0, x1), max(35, y1)), scale=1, thickness=1)
+            cvzone.putTextRect(img, f'{classNames[cls]} {conf}', (max(0, x1), max(35, y1)), scale=1, thickness=1)
             if classNames[cls] in data:
                 data[classNames[cls]] += 1
 
+    display_folder = 'static'
+    display_path = os.path.join(display_folder, file.filename)
+    cv2.imwrite(display_path, img)
     #
     # cv.imshow("Image", img)
     # cv.waitKey(0)
-    return jsonify({'success': True, 'image_path': file_path, 'Ambulance':data['Ambulance'], 'Bus': data['Bus'], 'Car': data['Car'], 'Motorcycle': data['Motorcycle'], 'Truck':data['Truck']})
+    return jsonify({'success': True, 'image_path': display_path, 'Ambulance':data['Ambulance'], 'Bus': data['Bus'], 'Car': data['Car'], 'Motorcycle': data['Motorcycle'], 'Truck':data['Truck']})
 
 if __name__ == "__main__":
     app.run(debug=True)
