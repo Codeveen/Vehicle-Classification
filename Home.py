@@ -32,8 +32,10 @@ def post():
     file_path = os.path.join(upload_folder, file.filename)
     file.save(file_path)
 
+    working_dir = os.getcwd()
+    model_dir = os.getcwd() + '//Vehicles-OpenImages.v1-416x416.yolov8//runs//detect//train4//weights//best.pt'
     # Load the YOLO model
-    model = YOLO('C://Users//prave//OneDrive//Documents//GitHub//Vehicle-Classification//Vehicles-OpenImages.v1-416x416.yolov8//runs//detect//train4//weights//best.pt')
+    model = YOLO(os.path.join(model_dir))
 
     # Define the class names
     classNames = ['Ambulance', 'Bus', 'Car', 'Motorcycle', 'Truck']
